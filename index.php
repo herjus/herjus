@@ -75,7 +75,7 @@
             <h4>06.2007 - 04.2011 - Driver, Dolly Dimples</h4>
             <p class="work-box">
                 <ul class="work-list">
-                    <li>Driver and cook on the most busy Dolly restaurant in Norway.</li> 
+                    <li>Driver and cook in the most busy Dolly restaurant in Norway.</li> 
                 </ul>
             </p>
 
@@ -100,12 +100,11 @@
                     <li>CSS (Cascading Style Sheets)</li>
                     <li>MySQL database</li>
                     <li>C# and .NET</li>
-                    <li>F#</li>
+                    <li>F#</li> <br>
+                    <li><a href="https://github.com/herjus" target="_blank">Github</a></li>
+                    <li><a href="https://www.linkedin.com/in/herjus-risbakken-786a1358/" target="_blank">Linkedin</a></li>
                 </ul>
         	</div>
-            <picture class="trumpmarines">
-                <img src="images/trumpmarines.jpg">
-            </picture>
         </div>
 
     <?php include 'footer.php' ?>

@@ -8,7 +8,7 @@
     {
         if(($_GET['signup'] !=="success"))
         {
-           $first = htmlentities(fixString($_GET['first']));
+            $first = htmlentities(fixString($_GET['first']));
             $last = htmlentities(fixString($_GET['last']));
             $uid = htmlentities(fixString($_GET['uid']));
             $email = htmlentities(fixString($_GET['email']));

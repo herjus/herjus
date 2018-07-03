@@ -152,7 +152,7 @@ header .nav-login div a{
 	margin:5px;
 	color: #c5d7e6;
 	font-size:2em;
-	text-decoration-line: underline;
+	
 }
 .mainContent h2{
 	color: white;
@@ -204,6 +204,9 @@ header .nav-login div a{
 .sidebar-1 ul li{
 	margin-left:15px;
 	margin-top:5px;
+}
+.sidebar-1 ul li a{
+	text-decoration-line: underline;
 }
 
 
