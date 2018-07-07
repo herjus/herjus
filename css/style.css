@@ -10,13 +10,14 @@ height:100%;
 }
 
 a{
+	color:#c1cde4;
 	text-decoration: none;
 }
-a:hover{
-	color:white;
-}
 a:visited{
-	color:white;
+	color:#c1cde4;
+}
+a:hover{
+	color:#d2dcef;
 }
 .mainContainer{
 	background-image:url('../images/sample2.jpg');

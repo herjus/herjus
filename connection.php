@@ -33,6 +33,7 @@
             'Host Server Name' => $_SERVER['SERVER_NAME'],
             'Host Header' => $_SERVER['HTTP_HOST'],
             'Server Software' => $_SERVER['SERVER_SOFTWARE'],
+            'Server Protocol' => $_SERVER['SERVER_PROTOCOL'],
             'Document Root' => $_SERVER['DOCUMENT_ROOT'],
             'Current Page' => $_SERVER['PHP_SELF'],
             'Script Name' => $_SERVER['SCRIPT_NAME'],
@@ -42,6 +43,7 @@
         echo 'Host Server Name: ' . $server['Host Server Name'] . '<br>';
         echo 'Host Header: ' . $server['Host Header'] . '<br>';
         echo 'Server Software: ' . $server['Server Software'] . '<br>';
+        echo 'Server Protocol: ' . $server['Server Protocol'] . '<br>';
         echo 'Document Root: ' . $server['Document Root'] . '<br>';
         echo 'Current Page: ' . $server['Current Page'] . '<br>';
         echo 'Script Name: ' . $server['Script Name'] . '<br>';

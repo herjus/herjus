@@ -111,12 +111,12 @@
 		<h3>Char test</h3>
 		<form method="GET">
 			<?php 
-			/*if(isset($_GET['submit4']))
+			if(isset($_GET['submit4']))
 			{
 				$testname = $_GET['testname'];
-				$testname = mysqli_real_escape_string($conn, fixString($_GET['testname']));
+				$testname = mysqli_real_escape_string($conn, $_GET['testname']);
 			}
-			else $testname = "testname";*/
+			else $testname = "testname";
 			 ?>
 
 			<input type="text" name="testname" placeholder="testname "value="<?php if(isset($testname))echo $testname; else echo "øæå" ?>">
@@ -137,6 +137,7 @@
 						
 						echo "preg_match /^[a-zA-Z]*$/  Result: " . preg_match("/^[a-zA-Z]*$/", $name) . '<br>';
 						echo "preg_match /^[a-åA-Å]*$/  Result: " . preg_match("/^[a-åA-Å]*$/", $name) . '<br>';
+						echo "preg_match /\.pdf$/  Result: " . preg_match("/\.pdf$/", $name) . '<br>';
 						echo "name: "." $name " . '<br>';
 						
 						echo "htmlspecialchars: "." $htmlspecialchars  " . '<br>';

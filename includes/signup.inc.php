@@ -1,7 +1,7 @@
 <?php 
 session_start();
 function fixString($string){
-        return $result = ucwords(strtolower($string));
+        return $result = ucwords(mb_strtolower($string));
     }
 
 if(isset($_POST['submit']))
