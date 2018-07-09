@@ -11,3 +11,4 @@ $serverwl = $row['user_wl'];
 
 if($serverwl != null) $wl = json_decode($serverwl, true);
 else $wl = null;
+

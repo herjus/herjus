@@ -1,24 +1,21 @@
-<?php include 'mainHeader.php' ?>
-
-<?php 
-if(!isset($_SESSION['u_id']))
-{
-	header('Location: signup.php');
-	exit();
-}
-if(isset($_GET['wishlist']) && $_GET['wishlist'] != "added")
-{
-   	$name = htmlentities($_GET['name']);
-    $url = htmlentities($_GET['url']);
-    $price = htmlentities($_GET['price']);
-    $priority = $_GET['priority'];
-    $comment = htmlentities($_GET['comment']);
-}
-
-include 'includes/getwl.inc.php';
-
+<?php include 'mainHeader.php'; 
+	
+	if(!isset($_SESSION['u_id']))
+	{
+		header('Location: signup.php');
+		exit();
+	}
+	if(isset($_GET['wishlist']) && $_GET['wishlist'] == "empty")
+	{
+	   	$name = htmlentities($_GET['name']);
+	    $url = htmlentities($_GET['url']);
+	    $price = htmlentities($_GET['price']);
+	    $priority = $_GET['priority'];
+	    $comment = htmlentities($_GET['comment']);
+	}
+	
+	include 'includes/getwl.inc.php';
 ?>
-
 
 <div class="main-1">
 	<h4>My Wish List</h4>
@@ -28,29 +25,25 @@ include 'includes/getwl.inc.php';
 		{
 			for ($index = 0; $index < count($wl); $index++)
 			{
-				echo count($wl);
-				print_r($wl);
 				echo '<div class="wlitem">';
 				$wlitem = $wl[$index];
-
-				//$deleteString = "includes/deleteitem.inc.php?item=delete&&name=".$wl["$index"]['name']."&&url=".$wl["$index"]['url']."&&price=".$wl["$index"]['price']."&&priority=".$wl["$index"]['priority']."&&comment=".$wl["$index"]['comment'];
 				
 				$deleteString = "includes/deleteitem.inc.php?item=delete&&date=".$wl["$index"]['date'];
 
 				$wlname = htmlentities($wlitem['name']);
 			    $wlurl = htmlentities($wlitem['url']);
-			    if(isset($wlitem['price'])) $price = htmlentities($wlitem['price']);
-			    $priority = $wlitem['priority'];
-			    if(isset($wlitem['comment'])) $comment = htmlentities($wlitem['comment']);
+			    if(isset($wlitem['price'])) $wlprice = htmlentities($wlitem['price']);
+			    $wlpriority = $wlitem['priority'];
+			    if(isset($wlitem['comment'])) $wlcomment = htmlentities($wlitem['comment']);
 			    $wldate = $wlitem['date'];
 
 			    echo '<a class ="delete-button" href="'.$deleteString.'">X</a>';
 				echo "<div>Name: " . $wlname . "</div>";
 				echo "<div>Url: " . '<a href="'.$wlurl .'" target="_blank">'.$wlurl.'</a>' . "</div>";
-				if(!empty($price)) { echo "<div>Price: " . $price . "</div>"; }
-				echo '<div class="wl-date">Priority: ' . $priority;
-				echo '  Date added: ' . $wldate . '</div>';
-				if(!empty($price)) { echo "<div>Comment: " . $comment . "</div>"; }
+				if(!empty($wlprice)) { echo "<div>Price: " . $wlprice . "</div>"; }
+				echo '<div class="wl-date">Priority: ' . $wlpriority;
+				echo ' - Date added: ' . $wldate . '</div>';
+				if(!empty($wlcomment)) { echo "<div>Comment: " . $wlcomment . "</div>"; }
 				echo '</div>';
 				
 			}
@@ -81,5 +74,21 @@ include 'includes/getwl.inc.php';
 
 		</form>
 	</div>
+	<?php if($_SESSION['wl_public'] === false) echo '<div class="signUp">
+				<form action="includes/makepublic.inc.php" method="POST">
+					<button type="submit" name="makePublic">Make Wishlist Public</button>
+				</form>
+			</div>';
+			else echo '<div class="signUp">
+				<h3>Public wishlist link: </h3> <br/><h4><a style="color:black" href="publicWishlist.php?user='.$_SESSION['u_uid'].'"> www.herjus.no.publicWishlist.php?user='.$_SESSION['u_uid'].'</a></h4><br/>
+
+				<form action="includes/makepublic.inc.php" method="POST">
+					<button type="submit" name="makePrivate">Make Wishlist Private</button>
+				</form>
+			</div>';
+
+			 ?>
+
 </div>
+
 <?php include 'footer.php' ?>

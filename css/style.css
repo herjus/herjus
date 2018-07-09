@@ -301,7 +301,7 @@ header .nav-login div a{
 	border: 1px black solid;
 	padding:20px;
 	background-color: #a9e5f93b;
-	width:400px;
+	width:350px;
 	text-align:center;
 
 }
@@ -324,7 +324,7 @@ header .nav-login div a{
 	border: 1px black solid;
 	padding:20px;
 	background-color: #a9e5f93b;
-	width:auto;
+	width:350px;
 }
 .form-1{
 	align-content: left;
