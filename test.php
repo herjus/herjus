@@ -4,8 +4,8 @@
 	<h2>String Fixing Function</h2>
 	<div class= "testForm-1">
 		<form method="POST">
-			<input type="input" name="input" placeholder="Input" value="herJUs">
-			<input type="name" name="name" placeholder="Name" value="risBakken">
+			<input type="text" name="input" placeholder="Input" value="herJUs">
+			<input type="text" name="name" placeholder="Name" value="risBakken">
 			<input type="submit" name="submit1">
 		</form>
 		<div class="testBox">
@@ -26,7 +26,38 @@
 		</div>
 	</div>
 
-	
+	<h2>Multi Array</h2>
+	<div class= "testForm-1">
+		<form method="POST">
+			<input type="text" name="color" placeholder="Input" value="red">
+			<input type="text" name="shape" placeholder="Name" value="box">
+			<input type="submit" name="submitArray">
+		</form>
+		<div class="testBox">
+			<?php
+			if(isset($_POST['submitArray']))
+			{
+				$color = $_POST['color'];
+				$shape = $_POST['shape'];
+			    $a1 = array('color' => $color, 'shape' => $shape);
+			    echo 'Array: ';print_r($a1); echo '<br>';
+			    
+			    $jsonencode = json_encode($a1);
+			    echo 'json_encode: ';print_r($jsonencode); echo '<br>';echo '<br>';
+
+			    $jsondecodet = json_decode($jsonencode, true);
+			    echo 'json_decode, true: ';print_r($jsondecodet); echo '<br>';
+
+			    $jsondecodef = json_decode($jsonencode, false);
+			    echo 'json_decode, false: ';print_r($jsondecodef); echo '<br>';
+
+			    
+			}
+			
+
+			?>
+		</div>
+	</div>
 
 
 

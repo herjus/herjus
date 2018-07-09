@@ -37,7 +37,7 @@
         <input type="password" name="pwdr" placeholder="Repeat Password"/><br />
         <input type="text" name="email" placeholder="Email" value="<?php if(isset($email)) echo $email?>"/><br />
         <div class="radio-1">
-            <input type="radio" name="gender" value="male" <?php if(isset($_GET['gender'])) { if ($_GET['gender']=="male") echo 'checked'; }  ?> > Male <br>
+            <input type="radio" name="gender" value="male" checked > Male <br>
             <input type="radio" name="gender" value="female"<?php if(isset($_GET['gender'])) { if ($_GET['gender']=="female") echo 'checked'; }  ?> > Female <br>
             <input type="radio" name="gender" value="peoplekind" <?php if(isset($_GET['gender'])) { if ($_GET['gender']=="peoplekind") echo 'checked'; }  ?> > Peoplekind <br>   
         </div>

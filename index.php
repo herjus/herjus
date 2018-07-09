@@ -103,7 +103,7 @@
                     <li>F#</li> <br>
                     <li><a href="https://github.com/herjus" target="_blank">Github</a></li>
                     <li><a href="https://www.linkedin.com/in/herjus-risbakken-786a1358/" target="_blank">Linkedin</a></li>
-                    <li><a href="includes/download.inc.php?file= CV-herjus.pdf">Download CV in PDF</a></li>
+                    <li><a href="includes/download.inc.php?file=CV-herjus.pdf">Download CV in PDF</a></li>
                 </ul>
         	</div>
         </div>

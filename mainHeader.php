@@ -46,14 +46,16 @@
 					<ul>
 			    	<li><a href="index.php">Home</a></li>
 			    	<?php if(!isset($_SESSION['u_id'])) echo 
-			    	'<li><a href="signup.php">Calculator</a></li>
+			    	'<li><a href="signup.php">Wish List</a></li>
+			    	<li><a href="signup.php">Calculator</a></li>
 			        <li><a href="signup.php">Calender</a></li>
 			        <li><a href="signup.php">Connection</a></li>
 			        <li><a href="signup.php">Test Site</a></li>
 			        <li><a href="signup.php">Hashing passwords</a></li>
 			        <li><a href="signup.php">Sign up</a></li>' ?>
 			    	<?php if(isset($_SESSION['u_id'])) echo 
-					'<li><a href="calculator.php">Calculator</a></li>
+					'<li><a href="wishlist.php">Wish List</a></li>
+					<li><a href="calculator.php">Calculator</a></li>
 			        <li><a href="calender.php">Calender</a></li>
 			        <li><a href="connection.php">Connection</a></li>
 			        <li><a href="test.php">Test Site</a></li>

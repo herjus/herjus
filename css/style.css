@@ -225,6 +225,8 @@ header .nav-login div a{
 .sidebar-1 h1{
 	font-size:1.5em;
 }
+
+
 .sidebar-2{
 	float:left;
 	padding:30px;
@@ -240,6 +242,136 @@ header .nav-login div a{
 		float:right;
 	}
 }
+
+.sidebar-3{
+	float:left;
+	align-items: left;
+	padding:20px;
+	padding-top:30px;
+	width:55%;
+	margin:auto;
+}
+.sidebar-3 ul li{
+	margin-left:15px;
+	margin-top:5px;
+}
+.sidebar-3 ul li a{
+	text-decoration-line: underline;
+}
+
+
+
+@media (min-width: 1118px){
+	.sidebar-3{
+		float:right;
+		align-items: left;
+		padding:15px;
+		padding-top:30px;
+		width:400px;
+		margin:auto;
+	}
+}
+.sidebar-3 h1{
+	font-size:1.5em;
+}
+.wlitem{
+	text-align:left;
+	font-size:0.9em;
+	border: 1px black solid;
+	padding:3px;
+	background-color: #a9e5f93b;
+	width:90%;
+}
+.wl-lastline{
+	width:85%;
+	display:inline-block;
+}
+.wlitem .delete-button{
+	float:right;
+
+	color:red;
+}
+.wl-lastline div{
+	align-content:left;
+	float:left;
+}
+
+.signUp {
+	align-items: center;
+	border: 1px black solid;
+	padding:20px;
+	background-color: #a9e5f93b;
+	width:400px;
+	text-align:center;
+
+}
+.signUp input{
+	align-items: center;
+	margin:5px;
+	padding:7px;
+	width:250px;
+}
+.signUp button{
+	align-items: center;
+	margin:5px;
+	padding:7px;
+	width:268px;
+}
+
+.form-1 {
+	align-items: left;
+	text-align:left;
+	border: 1px black solid;
+	padding:20px;
+	background-color: #a9e5f93b;
+	width:auto;
+}
+.form-1{
+	align-content: left;
+}
+
+.form-1 input{
+	align-items: left;
+	margin:5px;
+	padding:5px;
+	width:300px;
+}
+.form-1 button{
+	margin:15px;
+	padding:9px;
+	width:120px;
+}
+
+.radio-1{
+	text-align:left;
+	margin:15px;
+	padding-left:70px;
+}
+.radio-1 input{
+	align-items: center;
+	text-align:left;
+	margin:0px;
+	margin-right:20px;
+	padding:0px;
+	width:20px;
+}
+.radio-2{
+	display:inline;
+	padding-left:12px;
+}
+.radio-2 input{
+	align-items: center;
+	text-align:left;
+	margin:0px;
+	margin-left:15px;
+	padding:0px;
+	width:20px;
+}
+.required{
+	color:red;
+}
+
+
 
 .conn{
 	width:90%;
@@ -279,7 +411,7 @@ header .nav-login div a{
 	background-color:grey;
 }
 .calcMessage{
-	background-color:lightblue;
+	background-color:#a9e5f93b;
 	font-size:1.75em;
 	width:30%;
 	padding:0;
@@ -292,7 +424,7 @@ header .nav-login div a{
 
 
 .timeBox{
-	background-color:lightblue;
+	background-color:#a9e5f93b;
 	padding:2em;
 }
 
@@ -339,43 +471,9 @@ font-size:1.2em;
 }
 .testBox{
 	padding:20px;
-	background-color:lightblue;
+	background-color:#a9e5f93b;
 	border:1px black solid;
 	width:60%;
-}
-
-.signUp {
-	align-items: center;
-	border: 1px black solid;
-	padding:20px;
-	background-color: lightblue;
-	width:400px;
-	text-align:center;
-
-}
-.signUp input{
-	align-items: center;
-	margin:5px;
-	padding:7px;
-	width:250px;
-}
-.signUp button{
-	align-items: center;
-	margin:5px;
-	padding:7px;
-	width:268px;
-}
-.radio-1{
-	text-align:left;
-	padding-left:70px;
-}
-.radio-1 input{
-	align-items: center;
-	text-align:left;
-	margin:0px;
-	margin-right:20px;
-	padding:0px;
-	width:20px;
 }
 .error{
 	color:black;
@@ -396,14 +494,14 @@ font-size:1.2em;
 	border: 1px black solid;
 	padding:20px;
 	color:white;
-	background-color:lightblue;
+	background-color:#a9e5f93b;
 	width: 400px;
 }
 .box-2{
 	border: 2px black solid;
 	padding:20px;
 	color:black;
-	background-color:lightblue;
+	background-color:#a9e5f93b;
 	width: 800px;
 	margin:auto;
 }
