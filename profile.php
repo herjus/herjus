@@ -1,5 +1,5 @@
-<?php include_once 'mainHeader.php' ?>
-<?php 
+<?php include_once 'mainHeader.php';
+
 if(!isset($_SESSION['u_uid'])) 
 {
 	header('Location: index.php');
@@ -7,19 +7,18 @@ if(!isset($_SESSION['u_uid']))
 }
 ?>
 <div>
-	
-
 	<div class="box-3">
 		<h1>Profile Summary</h1>
 
 		<div>
+			<div class="signUp">
 			<?php 
 			echo "<br> Name: " . $_SESSION['u_first'] . ' '. $_SESSION['u_last'] . '<br>';
 			echo "E-mail: " . $_SESSION['u_email'] . '<br>';
 			echo "Username: " . $_SESSION['u_uid'] . '<br>';
 			echo "Joined: " . $_SESSION['date'] . '<br>';
 			echo 'Server Id: ' . $_SESSION['u_id'] . '<br>';
-			 ?>
+			 ?></div>
 			 <div>
 			 	
 			 
@@ -107,6 +106,24 @@ if(!isset($_SESSION['u_uid']))
 		}
 	}
 
+	?>
+
+	<?php 
+		if(isset($_SESSION['u_uid']))
+		{
+			echo '<h1>Wishlist</h1>';
+			echo '<div class="signUp">';
+			if($_SESSION['wl_public'] === false) echo '<form action="includes/makepublic.inc.php" method="POST">
+					<button type="submit" name="makePublic">Make Wishlist Public</button>
+				</form>
+			</div>';
+			else echo '<h3>Public wishlist link: </h3> <br/><h4><a style="color:black" href="publicWishlist.php?user='.$_SESSION['u_uid'].'"> www.herjus.no.publicWishlist.php?user='.$_SESSION['u_uid'].'</a></h4><br/>
+
+				<form action="includes/makepublic.inc.php" method="POST">
+					<button type="submit" name="makePrivate">Make Wishlist Private</button>
+				</form>
+			</div>';
+		}
 	?>
 	
 </div>

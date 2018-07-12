@@ -1,4 +1,5 @@
 <?php 
+include '../class/user.class.php';
 session_start();
 function fixString($string){
         return $result = ucwords(mb_strtolower($string));
@@ -6,102 +7,76 @@ function fixString($string){
 
 if(isset($_POST['submit']))
 {
-	include_once 'dbh.inc.php';
-	$first = mysqli_real_escape_string($conn, fixString($_POST['first']));
-    $last = mysqli_real_escape_string($conn, fixString($_POST['last']));
-    $uid = mysqli_real_escape_string($conn, fixString($_POST['uid']));
-	$pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
-	$pwdr = mysqli_real_escape_string($conn, $_POST['pwdr']);
-    $email = mysqli_real_escape_string($conn, fixString($_POST['email']));
-    $gender = $_POST['gender'];
+	$user = new User;
+	if(!empty(htmlspecialchars(fixString($_POST['first'])))) $user->setFirst(htmlspecialchars(fixString($_POST['first'])));
+	if(!empty(htmlspecialchars(fixString($_POST['last'])))) $user->setLast(htmlspecialchars(fixString($_POST['last'])));
+	if(!empty(htmlspecialchars(fixString($_POST['uid'])))) $user->setUid(htmlspecialchars(fixString($_POST['uid'])));
+	if(!empty(htmlspecialchars(fixString($_POST['email'])))) $user->setEmail(htmlspecialchars(fixString($_POST['email'])));
+	if(!empty(htmlspecialchars(fixString($_POST['gender'])))) $user->setGender($_POST['gender']);
+	
+	$pwd = htmlspecialchars($_POST['pwd']);
+	$pwdr = htmlspecialchars($_POST['pwdr']);
 
 
-    if(empty($first) || empty($last) || empty($uid) || empty($pwd) || empty($pwdr) || empty($email))
+    if(empty($user->user_first) || empty($user->user_last) || empty($user->user_uid) || empty($pwd) || empty($pwdr) || empty($user->user_email))
     {
-    	header("Location: ../signup.php?signup=empty&first=$first&last=$last&uid=$uid&email=$email&gender=$gender");
+    	header("Location: ../signup.php?signup=empty&first=$user->user_first&last=$user->user_last&uid=$user->user_uid&email=$user->user_email&gender=$user->user_gender");
 		exit();
     }
     else
 	{
 		if($pwd !== $pwdr)
 		{
-			header("Location: ../signup.php?signup=passwordmm&first=$first&last=$last&uid=$uid&email=$email&gender=$gender");
+			header("Location: ../signup.php?signup=passwordmm&first=$user->user_first&last=$user->user_last&uid=$user->user_uid&email=$user->user_email&gender=$user->user_gender");
 			exit();
 		}
 		else
 		{
 			if(strlen($pwd) <= 7)
 			{
-				header("Location: ../signup.php?signup=passwordshort&first=$first&last=$last&uid=$uid&email=$email&gender=$gender");
+				header("Location: ../signup.php?signup=passwordshort&first=$user->user_first&last=$user->user_last&uid=$user->user_uid&email=$user->user_email&gender=$user->user_gender");
 				exit();
 			}
 			else
 			{
-				if(!preg_match("/^[a-yA-Y]*$/", $first) || !preg_match("/^[a-yA-Y]*$/", $last))
+				if(!preg_match("/^[a-yA-Y]*$/", $user->user_first) || !preg_match("/^[a-yA-Y]*$/", $user->user_last))
 				{
-					header("Location: ../signup.php?signup=char&first=$first&last=$last&uid=$uid&email=$email&gender=$gender");
+					header("Location: ../signup.php?signup=char&first=$user->user_first&last=$user->user_last&uid=$user->user_uid&email=$user->user_email&gender=$user->user_gender");
 					exit();
 				}
 				else
 				{
-					if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+					if(!filter_var($user->user_email, FILTER_VALIDATE_EMAIL))
 					{
-						header("Location: ../signup.php?signup=invalidemail&first=$first&last=$last&uid=$uid&email=$email&gender=$gender");
+						header("Location: ../signup.php?signup=invalidemail&first=$user->user_first&last=$user->user_last&uid=$user->user_uid&email=$user->user_email&gender=$user->user_gender");
 						exit();
 					}
 					else
 					{
-						$sql = "SELECT * FROM users WHERE user_uid=? OR user_email=?;";
-						$stmt = mysqli_stmt_init($conn);
-                        if(!mysqli_stmt_prepare($stmt, $sql))
-                        {
-                            echo "Failure: SQL statement failed. Select query";
-                        }
-                        else
-                        {
-                            mysqli_stmt_bind_param($stmt, "ss", $username, $email);
-                            mysqli_stmt_execute($stmt);
-                            $result = mysqli_stmt_get_result($stmt);
-                            
-                            $resultsCheck = mysqli_num_rows($result);
-                            if($resultsCheck > 0)
-                            {
-                            	while ($row = mysqli_fetch_assoc($result)) 
-                                {
-                                    if(htmlentities($row['user_uid']) === $username)
-                                    {
-                                    	header("Location: ../signup.php?signup=usertaken&first=$first&last=$last&uid=$uid&email=$email&gender=$gender");
-										exit();
-                                    }
-                                    if(htmlentities($row['user_email']) === $email)
-                                	{
-                                    	header("Location: ../signup.php?signup=emailtaken&first=$first&last=$last&uid=$uid&email=$email&gender=$gender");
-										exit();
-                                    }
-                                }
-                            }
-                            else 
-                            {
-                            	$hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-                                $date = date("Y/m/d H:i:s");
-                            	$sql = "INSERT INTO users(user_first, user_last, user_email, user_uid, user_pwd, user_gender, date) VALUES(?,?,?,?, '$hashedPwd', '$gender', '$date');";
-                            	$stmt = mysqli_stmt_init($conn);
-					            if(!mysqli_stmt_prepare($stmt, $sql))
-					            {
-					                echo "Failure: SQL statement failed. Signup query";
-					            }
-					            else
-					            {
-					            	//signing up user in MySQL db
-					                mysqli_stmt_bind_param($stmt, "ssss", $first, $last, $email, $uid);
-					                mysqli_execute($stmt);
+						$signup = $user->signup($user->user_first, $user->user_last, $user->user_uid, $pwd, $pwdr, $user->user_email, $user->user_gender);
 
-									
-					                header("Location: ../signup.php?signup=success");
-					                exit();
-					            }
-                            }
-                        }
+						if($signup == "usernametaken")  
+						{
+							header("Location: ../signup.php?signup=usernametaken&first=$user->user_first&last=$user->user_last&uid=$user->user_uid&email=$user->user_email&gender=$user->user_gender");
+						}
+						elseif($signup == "emailtaken")  
+						{
+							header("Location: ../signup.php?signup=emailtaken&first=$user->user_first&last=$user->user_last&uid=$user->user_uid&email=$user->user_email&gender=$user->user_gender");
+						}
+						elseif($signup == "uidemailtaken")  
+						{
+							header("Location: ../signup.php?signup=uidemailtaken&first=$user->user_first&last=$user->user_last&uid=$user->user_uid&email=$user->user_email&gender=$user->user_gender");
+						}
+						elseif($signup == "success")
+						{
+
+							header("Location: ../signup.php?signup=success");
+			                exit();
+						}
+						else
+						{
+							header("Location: ../signup.php?signup=unknownerror&&msg=".$signup);
+						}
 					}	
 				}
 			}

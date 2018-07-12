@@ -1,6 +1,5 @@
 <?php session_start(); ?>
 
-<?php include_once 'includes/dbh.inc.php' ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +16,8 @@
 				<div class="nav-login">
 					
 					<?php 
+					if(isset($_GET['link'])) $link = htmlspecialchars($_GET['link']);
+    				else $link = "index";
 					if(isset($_SESSION['u_id']))
 					{
 						echo '<div class="loggedin-box"><form action="includes/logout.inc.php" method="POST">
@@ -29,6 +30,7 @@
 					else
 					{
 						echo '<div><form method="POST" action="includes/login.inc.php">
+						<input type="hidden" name="link" value="'.$link.'">
 						<input type="text" name="uid" placeholder="username/e-mail">
 						<input type="password" name="pwd" placeholder="password">
 						<button type="submit" name="submit">Login</button>
@@ -36,7 +38,6 @@
 						<a href="signup.php">Sign Up</a></div>';
 					}
 					?>
-					
 					
 					
 				</div>
@@ -47,15 +48,15 @@
 			    	<li><a href="index.php">Home</a></li>
 			    	<?php if(!isset($_SESSION['u_id'])) echo 
 			    	'<li><a href="publicWishlist.php">Public Wishlist</a></li>
-			    	<li><a href="signup.php">Calculator</a></li>
-			        <li><a href="signup.php">Calender</a></li>
-			        <li><a href="signup.php">Connection</a></li>
-			        <li><a href="signup.php">Test Site</a></li>
-			        <li><a href="signup.php">Hashing passwords</a></li>
+			    	<li><a href="signup.php?link=calculator">Calculator</a></li>
+			        <li><a href="signup.php?link=calender">Calender</a></li>
+			        <li><a href="signup.php?link=connection">Connection</a></li>
+			        <li><a href="signup.php?link=test">Test Site</a></li>
+			        <li><a href="signup.php?link=hashing">Hashing passwords</a></li>
 			        <li><a href="signup.php">Sign up</a></li>' ?>
 			    	<?php if(isset($_SESSION['u_id'])) echo 
 					'<li><a href="wishlist.php">Wish List</a></li>
-					<li><a href="publicWishlist.php">Public Wishlist</a></li>
+					<li><a href="publicWishlist.php?user='.$_SESSION['u_uid'].'">Public Wishlist</a></li>
 					<li><a href="calculator.php">Calculator</a></li>
 			        <li><a href="calender.php">Calender</a></li>
 			        <li><a href="connection.php">Connection</a></li>

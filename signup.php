@@ -15,21 +15,24 @@
             $gender = htmlentities(($_GET['gender']));
         }
     }
+    if(isset($_GET['link'])) $link = htmlspecialchars($_GET['link']);
+    else $link = "index";
         
     ?>
     <div class="signUp">
         <h2>Log in</h2>
         <form method="POST" action="includes/login.inc.php">
+        <input type="hidden" name="link" value="<?php echo $link ?>">
         <input type="text" name="uid" placeholder="username/e-mail">
         <input type="password" name="pwd" placeholder="password">
         <button type="submit" name="submit">Login</button>
         </form>
     </div>
 
-
     <div class="signUp">
         <h2>Sign Up</h2>
         <form action="includes/signup.inc.php" method="POST">
+        <input type="hidden" name="link" value="<?php echo $link ?>">
         <input type="text" name="first" placeholder="First name" value="<?php if(isset($first)) echo $first?>" /> <br />
         <input type="text" name="last" placeholder="Last name" value="<?php if(isset($last)) echo $last?>"/><br />
         <input type="text" name="uid" placeholder="Username" value="<?php if(isset($uid)) echo $uid?>"/><br />

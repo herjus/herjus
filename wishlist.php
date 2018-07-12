@@ -1,8 +1,10 @@
-<?php include 'mainHeader.php'; 
-	
+<?php 
+	include 'mainHeader.php'; 
+	include 'includes/wlhandler.inc.php';
+
 	if(!isset($_SESSION['u_id']))
 	{
-		header('Location: signup.php');
+		header('Location: signup.php?link=wishlist');
 		exit();
 	}
 	if(isset($_GET['wishlist']) && $_GET['wishlist'] == "empty")
@@ -13,22 +15,20 @@
 	    $priority = $_GET['priority'];
 	    $comment = htmlentities($_GET['comment']);
 	}
-	
-	include 'includes/getwl.inc.php';
 ?>
 
 <div class="main-1">
 	<h4>My Wish List</h4>
 	
 	<?php 
-		if (isset($wl))
+		if (isset($wl->user_wl))
 		{
-			for ($index = 0; $index < count($wl); $index++)
+			for ($index = 0; $index < count($wl->user_wl); $index++)
 			{
 				echo '<div class="wlitem">';
-				$wlitem = $wl[$index];
+				$wlitem = $wl->user_wl[$index];
 				
-				$deleteString = "includes/deleteitem.inc.php?item=delete&&date=".$wl["$index"]['date'];
+				$deleteString = "wishlist.php?delete=true&&date=".$wlitem['date'];
 
 				$wlname = htmlentities($wlitem['name']);
 			    $wlurl = htmlentities($wlitem['url']);
@@ -54,7 +54,7 @@
 <div class="sidebar-3">
 	<div class="form-1">
 	<h1>Add Item</h1>
-		<form method="POST" action="includes/addwlitem.inc.php">
+		<form method="POST">
 			<div class="required">
 				<input type="text" name="name" placeholder="Item Name" value="<?php if(isset($name)) echo $name?>"> *
 			</div>
@@ -70,20 +70,20 @@
 				<input type="radio" name="priority" value="Low" <?php if(isset($_GET['priority'])) { if($_GET['priority']=="low") echo 'checked'; }  ?> > Low
 			</div>
 			 <input type="comment" name="comment" placeholder="Comment" value="<?php if(isset($comment)) echo $comment?>"><br>
-			<button type="submit" name="submitItem">Add</button>
+			<button type="submit" name="addItem">Add</button>
 
 		</form>
 	</div>
 	<?php if($_SESSION['wl_public'] === false) echo '<div class="signUp">
-				<form action="includes/makepublic.inc.php" method="POST">
-					<button type="submit" name="makePublic">Make Wishlist Public</button>
+				<form method="POST">
+					<button type="submit" name="changeVisibility" value="public">Make Wishlist Public</button>
 				</form>
 			</div>';
 			else echo '<div class="signUp">
 				<h3>Public wishlist link: </h3> <br/><h4><a style="color:black" href="publicWishlist.php?user='.$_SESSION['u_uid'].'"> www.herjus.no.publicWishlist.php?user='.$_SESSION['u_uid'].'</a></h4><br/>
 
-				<form action="includes/makepublic.inc.php" method="POST">
-					<button type="submit" name="makePrivate">Make Wishlist Private</button>
+				<form method="POST">
+					<button type="submit" name="changeVisibility" value="private">Make Wishlist Private</button>
 				</form>
 			</div>';
 

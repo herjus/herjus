@@ -5,7 +5,11 @@
 if(isset($_GET['user'])) 
 {
 	$user = $_GET['user'];
-	include_once 'includes/getpublicwl.inc.php';
+	include_once 'class/wl.class.php';
+	$wishlist = new Wishlist;
+	if(isset($_POST['changeVisibility'])) $changeVisibility = $wishlist->changeVisibility($_POST['changeVisibility']);
+	$wishlist->getPublicWl($user);
+	$wl = $wishlist->user_wl;
 }
 ?>
 
@@ -44,20 +48,27 @@ if(isset($_GET['user']))
 <div class="sidebar-3">
 	
 	<?php 
-		if(isset($_SESSION['u_uid']) && $_SESSION['u_uid'] === $user)
+		if(isset($_SESSION['u_uid']) && isset($user))
 		{
-			if($_SESSION['wl_public'] === false) echo '<div class="signUp">
-				<form action="includes/makepublic.inc.php" method="POST">
-					<button type="submit" name="makePublic">Make Wishlist Public</button>
-				</form>
-			</div>';
-			else echo '<div class="signUp">
-				<h3>Public wishlist link: </h3> <br/><h4><a style="color:black" href="publicWishlist.php?user='.$_SESSION['u_uid'].'"> www.herjus.no.publicWishlist.php?user='.$_SESSION['u_uid'].'</a></h4><br/>
 
-				<form action="includes/makepublic.inc.php" method="POST">
-					<button type="submit" name="makePrivate">Make Wishlist Private</button>
+			if($_SESSION['u_uid'] === $user)
+			{
+				if($_SESSION['wl_public'] === false) echo '<div class="signUp">
+				<form method="POST">
+					<button type="submit" name="changeVisibility" value="public">Make Wishlist Public</button>
 				</form>
-			</div>';
+				</div>';
+				else echo '<div class="signUp">
+					<h3>Public wishlist link: </h3> <br/><h4><a style="color:black" href="publicWishlist.php?user='.$_SESSION['u_uid'].'"> www.herjus.no.publicWishlist.php?user='.$_SESSION['u_uid'].'</a></h4><br/>
+
+					<form method="POST">
+						<button type="submit" name="changeVisibility" value="private">Make Wishlist Private</button>
+					</form>
+				</div>';
+			}
+			 
+
+			 
 		}
 	?>
 
