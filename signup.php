@@ -15,14 +15,14 @@
             $gender = htmlentities(($_GET['gender']));
         }
     }
-    if(isset($_GET['link'])) $link = htmlspecialchars($_GET['link']);
-    else $link = "index";
+    if(isset($_GET['origin'])) $origin = htmlspecialchars($_GET['origin']);
+    else $origin = "index";
         
     ?>
     <div class="signUp">
         <h2>Log in</h2>
         <form method="POST" action="includes/login.inc.php">
-        <input type="hidden" name="link" value="<?php echo $link ?>">
+        <input type="hidden" name="origin" value="<?php echo $origin ?>">
         <input type="text" name="uid" placeholder="username/e-mail">
         <input type="password" name="pwd" placeholder="password">
         <button type="submit" name="submit">Login</button>
@@ -31,8 +31,8 @@
 
     <div class="signUp">
         <h2>Sign Up</h2>
-        <form action="includes/signup.inc.php" method="POST">
-        <input type="hidden" name="link" value="<?php echo $link ?>">
+        <form action="includes/userhandler.inc.php" method="POST">
+        <input type="hidden" name="origin" value="<?php echo $origin ?>">
         <input type="text" name="first" placeholder="First name" value="<?php if(isset($first)) echo $first?>" /> <br />
         <input type="text" name="last" placeholder="Last name" value="<?php if(isset($last)) echo $last?>"/><br />
         <input type="text" name="uid" placeholder="Username" value="<?php if(isset($uid)) echo $uid?>"/><br />
@@ -45,7 +45,7 @@
             <input type="radio" name="gender" value="peoplekind" <?php if(isset($_GET['gender'])) { if ($_GET['gender']=="peoplekind") echo 'checked'; }  ?> > Peoplekind <br>   
         </div>
         
-        <button type="submit" name="submit">Sign up</button>
+        <button type="submit" name="submit" value="signup">Sign up</button>
         </form>
     </div>
     <div>

@@ -1,16 +1,16 @@
-<?php include 'mainHeader.php' ?>
+<?php include 'mainHeader.php'; include 'class/dbh.class.php' ?>
 
 <div class="conn">
     <h2>MySQL Server status</h2>
        <?php
-    
+            $dbh = new Dbh;
             $sql = "SELECT * FROM users;";
-            $results = mysqli_query($conn, $sql);
-            $resultsCheck = mysqli_num_rows($results);
+            $stmt = $dbh->connect()->query($sql);
+            $resultsCheck = $stmt->rowCount();
         ?>
     <div class ="connectionStatus">
         <?php
-            echo $conn ? 'Connection established with server' : 'no connection with server' ; 
+            echo $stmt ? 'Connection established with server' : 'no connection with server' ; 
         ?>
         
     </div>

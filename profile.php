@@ -30,8 +30,8 @@ if(!isset($_SESSION['u_uid']))
 			 
 	 			else
 	 			{
-	 			 	echo '<form method="POST" action="includes/requestpwd.inc.php" class="signUp">
-		  				<button type="submit" name="requestpwd">Request Password Hash stored on server</button>
+	 			 	echo '<form method="POST" action="includes/userhandler.inc.php" class="signUp">
+		  				<button type="submit" name="submit" value ="requestpwd">Request Password Hash stored on server</button>
 		  			 	<input type="password" name="pwd" placeholder="Password">
 		  				</form>';
 	 			}
@@ -48,8 +48,8 @@ if(!isset($_SESSION['u_uid']))
 		 			}
 	 				if($_GET['requestpwd'] == "success")
 		 			{
-		 				$pwdResult = htmlentities($_GET['pwdhash']);
-		 				echo "<p class='error'> $pwdResult </p>";
+		 				$pwdResult = htmlspecialchars($_GET['pwdhash']);
+		 				echo "<p class='error'>Password Hash: ". $pwdResult. "</p>";
 		 			}
 	 			}
 	 			
@@ -65,19 +65,16 @@ if(!isset($_SESSION['u_uid']))
 		</form>' ?>
 		
 		<?php if(isset($_GET['startpwdr']) || isset($_GET['form'])) echo
-		'<form method="POST" class="signUp" action="includes/changepwd.inc.php">
-			<input type="password" name="pwdOld" placeholder="Old Password">
-			<input type="password" name="pwd" placeholder="New Password">
-			<input type="password" name="pwdr" placeholder="Repeat Password">
-			<button type="submit" name="submit">Change Password</button>
+		'<form method="POST" class="signUp" action="includes/userhandler.inc.php">
+			<input type="password" name="pwd" placeholder="Password">
+			<input type="password" name="pwdnew" placeholder="New Password">
+			<input type="password" name="pwdnewr" placeholder="Repeat Password">
+			<button type="submit" name="submit" value="changepwd">Change Password</button>
 		</form>' ?>
 	</div>
 
 	<?php 
-	if(!isset($_GET['form']))
-	{
-	}
-	else
+	if(isset($_GET['form']))
 	{
 		$formResult = htmlentities($_GET['form']);
 		if($formResult == "empty")
@@ -108,23 +105,22 @@ if(!isset($_SESSION['u_uid']))
 
 	?>
 
-	<?php 
-		if(isset($_SESSION['u_uid']))
-		{
-			echo '<h1>Wishlist</h1>';
-			echo '<div class="signUp">';
-			if($_SESSION['wl_public'] === false) echo '<form action="includes/makepublic.inc.php" method="POST">
-					<button type="submit" name="makePublic">Make Wishlist Public</button>
+	<?php if($_SESSION['wl_public'] === false) echo '<div class="signUp">
+				<form method="POST" action="includes/wlhandler.inc.php">
+					<input type="hidden" name="origin" value="profile">
+					<button type="submit" name="changeVisibility" value="public">Make Wishlist Public</button>
 				</form>
 			</div>';
-			else echo '<h3>Public wishlist link: </h3> <br/><h4><a style="color:black" href="publicWishlist.php?user='.$_SESSION['u_uid'].'"> www.herjus.no.publicWishlist.php?user='.$_SESSION['u_uid'].'</a></h4><br/>
+			else echo '<div class="signUp">
+				<h3>Public wishlist link: </h3> <br/><h4><a style="color:black" href="publicWishlist.php?user='.$_SESSION['u_uid'].'"> www.herjus.no.publicWishlist.php?user='.$_SESSION['u_uid'].'</a></h4><br/>
 
-				<form action="includes/makepublic.inc.php" method="POST">
-					<button type="submit" name="makePrivate">Make Wishlist Private</button>
+				<form method="POST" action="includes/wlhandler.inc.php">
+				<input type="hidden" name="origin" value="profile">
+					<button type="submit" name="changeVisibility" value="private">Make Wishlist Private</button>
 				</form>
 			</div>';
-		}
-	?>
+
+			 ?>
 	
 </div>
 <?php include_once 'footer.php' ?>

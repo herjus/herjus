@@ -1,5 +1,6 @@
 <?php 
-include 'class/wl.class.php';
+session_start();
+include '../class/wl.class.php';
 
 if(isset($_SESSION['u_id']))
 {
@@ -7,19 +8,21 @@ if(isset($_SESSION['u_id']))
 	$wl->getWl();
 	$id = $_SESSION['u_id'];
 
+	if(isset($_POST['origin'])) $origin = htmlspecialchars($_POST['origin']);
+	else $origin = "wishlist";
+
 	if(isset($_GET['delete']))
 	{
 		if(htmlentities($_GET['delete']) == "true")
 		{
 			$deldate = htmlentities($_GET['date']);
-			echo 'delete reached';
 			$deleteitem = $wl->deleteItem($deldate);
 
-		    header("Location: wishlist.php?item=".$deleteitem);
+		    header("Location: ../wishlist.php?item=".$deleteitem);
 		}
 	}
 
-	if(isset($_POST['addItem']))
+	elseif(isset($_POST['addItem']))
 	{
 		$name = htmlspecialchars($_POST['name']);
 	    $url = htmlspecialchars($_POST['url']);
@@ -27,15 +30,11 @@ if(isset($_SESSION['u_id']))
 	    $priority = $_POST['priority'];
 	    $comment = htmlspecialchars($_POST['comment']);
 
-	    if(empty($name) || empty($url))
-	    {
-	    	header("Location: wishlist.php?wishlist=empty&name=$name&url=$url&price=$price&priority=$priority&comment=$comment");
-	    }
+	    if(empty($name) || empty($url)) header("Location: ../wishlist.php?wishlist=empty&name=$name&url=$url&price=$price&priority=$priority&comment=$comment");
 	    else
 		{
 			$additem = $wl->addItem($name, $url, $price, $priority, $comment);
-
-	        header("Location: wishlist.php?wishlist=".$additem);
+	        header("Location: ../wishlist.php?wishlist=".$additem);
 		}
 	}
 	if(isset($_POST['changeVisibility']))
@@ -43,11 +42,9 @@ if(isset($_SESSION['u_id']))
 		$change = $_POST['changeVisibility'];
 
 		$changeVisibility = $wl->changeVisibility($change);
-
-		header("Location: wishlist.php?changeVisibility=".$changeVisibility);
+		header("Location: ../".$origin.".php?changeVisibility=".$changeVisibility);
 	}
 }
-
 else
 {
 	header("Location: ../signup.php?loginerror".$_SESSION['u_id']);

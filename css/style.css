@@ -318,6 +318,7 @@ header .nav-login div a{
 	width:268px;
 }
 
+
 .form-1 {
 	align-items: left;
 	text-align:left;
@@ -340,6 +341,29 @@ header .nav-login div a{
 	margin:15px;
 	padding:9px;
 	width:120px;
+}
+
+.form-2 {
+	align-items: left;
+	border: 1px black solid;
+	padding:20px;
+	background-color: #a9e5f93b;
+	width:600px;
+	text-align:left;
+
+}
+.form-2 input{
+	align-items: center;
+	margin:5px;
+	padding:7px;
+	width:500px;
+}
+.form-2 button{
+	align-items: left;
+	margin:15px;
+	margin-left:5px;
+	padding:7px;
+	width:200px;
 }
 
 .radio-1{

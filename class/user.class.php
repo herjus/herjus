@@ -1,7 +1,10 @@
 <?php 
 include 'dbh.class.php';
-session_start();
 
+function fixString($string){
+        return $result = ucwords(mb_strtolower($string));
+    }
+    
 class User extends Dbh
 {
 	public $user_id;
@@ -134,37 +137,62 @@ class User extends Dbh
 
     public function changepwd($user_pwd, $user_pwdnew, $user_pwdnewr)
     {
-    	if($user_pwdnew !== $user_pwdnewr)
-		{
-			$changepwd = "passwordmm";
-		}
-		elseif (strlen($pwd) <= 7) {
-			$changepwd = "passwordshort";
-		}
-		else
-		{
-			$id = $_SESSION['u_id'];
-
-	    	$sql = "SELECT * FROM users WHERE user_id='$id'";
-			$stmt = $this->connect()->query($sql);
-
-			while($row = $stmt->fetch)
+    	if(isset($_SESSION['u_id']))
+    	{
+    		if($user_pwdnew !== $user_pwdnewr)
 			{
-				$pwdTest = password_verify($user_pwd, $row['user_pwd']);
-				if($pwdTest == false)
-				{
-					$changepwd = "pwfalse";
-				}
-				elseif($pwdTest == true)
-				{
-					$pwdHashed = password_hash($user_pwdnew, PASSWORD_DEFAULT);
-					$sql = "UPDATE users SET user_pwd = '$pwdHashed' WHERE user_id='$id';";
-					$stmt = $this->connect()->query($sql);
+				$changepwd = "passwordmm";
+			}
+			elseif (strlen($user_pwd) <= 7) {
+				$changepwd = "passwordshort";
+			}
+			else
+			{
+				$id = $_SESSION['u_id'];
 
-					$changepwd = "success";
+		    	$sql = "SELECT * FROM users WHERE user_id='$id'";
+				$stmt = $this->connect()->query($sql);
+
+				if($row = $stmt->fetch())
+				{
+					$pwdTest = password_verify($user_pwd, $row['user_pwd']);
+					if($pwdTest == false)
+					{
+						$changepwd = "pwfalse";
+					}
+					elseif($pwdTest == true)
+					{
+						$pwdHashed = password_hash($user_pwdnew, PASSWORD_DEFAULT);
+						$sql = "UPDATE users SET user_pwd = '$pwdHashed' WHERE user_id='$id';";
+						$stmt = $this->connect()->query($sql);
+
+						$changepwd = "success";
+					}
 				}
 			}
+    	}
+    	else $changepwd = "not_logged_in";
+		return $changepwd;
+    }
+    public function requestpwd($user_pwd)
+    {
+    	if(isset($_SESSION['u_id']))
+    	{
+    		$pwd = $_POST['pwd'];
+			$id = $_SESSION['u_id'];
+			
+	    	$sql = "SELECT * FROM users WHERE user_id='$id';";
+			$stmt = $this->connect()->query($sql);
+			
+			if($row = $stmt->fetch())
+			{
+				$pwdTest = password_verify($user_pwd, $row['user_pwd']);
+				if($pwdTest == false) $requestpwd = "pwfalse";
+				elseif($pwdTest == true) $requestpwd = "success&&pwdhash=".$row['user_pwd'];
+			}
+			else $requestpwd = "usererror";
 		}
-		return $changedpwd;
+    	else $requestpwd = "not_logged_in";
+		return $requestpwd;
     }
 }

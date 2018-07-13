@@ -1,7 +1,6 @@
 <?php 
 	include 'mainHeader.php'; 
-	include 'includes/wlhandler.inc.php';
-
+	include 'class/wl.class.php';
 	if(!isset($_SESSION['u_id']))
 	{
 		header('Location: signup.php?link=wishlist');
@@ -21,6 +20,9 @@
 	<h4>My Wish List</h4>
 	
 	<?php 
+		$wl = new Wishlist;
+		$wl->getWl();
+
 		if (isset($wl->user_wl))
 		{
 			for ($index = 0; $index < count($wl->user_wl); $index++)
@@ -28,7 +30,7 @@
 				echo '<div class="wlitem">';
 				$wlitem = $wl->user_wl[$index];
 				
-				$deleteString = "wishlist.php?delete=true&&date=".$wlitem['date'];
+				$deleteString = "includes/wlhandler.inc.php?delete=true&&date=".$wlitem['date'];
 
 				$wlname = htmlentities($wlitem['name']);
 			    $wlurl = htmlentities($wlitem['url']);
@@ -54,7 +56,7 @@
 <div class="sidebar-3">
 	<div class="form-1">
 	<h1>Add Item</h1>
-		<form method="POST">
+		<form method="POST" action="includes/wlhandler.inc.php">
 			<div class="required">
 				<input type="text" name="name" placeholder="Item Name" value="<?php if(isset($name)) echo $name?>"> *
 			</div>
@@ -75,14 +77,14 @@
 		</form>
 	</div>
 	<?php if($_SESSION['wl_public'] === false) echo '<div class="signUp">
-				<form method="POST">
+				<form method="POST" action="includes/wlhandler.inc.php">
 					<button type="submit" name="changeVisibility" value="public">Make Wishlist Public</button>
 				</form>
 			</div>';
 			else echo '<div class="signUp">
 				<h3>Public wishlist link: </h3> <br/><h4><a style="color:black" href="publicWishlist.php?user='.$_SESSION['u_uid'].'"> www.herjus.no.publicWishlist.php?user='.$_SESSION['u_uid'].'</a></h4><br/>
 
-				<form method="POST">
+				<form method="POST" action="includes/wlhandler.inc.php">
 					<button type="submit" name="changeVisibility" value="private">Make Wishlist Private</button>
 				</form>
 			</div>';

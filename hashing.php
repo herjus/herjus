@@ -22,18 +22,14 @@
 		$hash1 = password_hash($test1, PASSWORD_DEFAULT);
 		$hash2 = password_hash($test2, PASSWORD_DEFAULT);
 		$hash3 = password_hash($test3, PASSWORD_DEFAULT);
-		$hash4 = password_hash($test4, PASSWORD_DEFAULT);
 
 		echo 'empty pw: ' . $test1 . 'hash: ' . $hash1 . '<br>'; 
 		echo 'pwd: ' . $test2 . 'hash: ' . $hash2 . '<br>';
 		echo 'pwd: ' . $test2 . 'hash: ' . $hash3 . '<br>';
-		echo 'pwd: ' . $test4 . 'hash: ' . $hash4 . '<br>';
-		echo "<br>". "<br>";
 		echo " <br> Empty string hash test: ";
 		pwdCheck("", password_hash("", PASSWORD_DEFAULT));
 		pwdCheck($test2, $hash2);
 		pwdCheck($test3, $hash3);
-		pwdCheck($test4, $hash4);
 		echo '<br>';
 		pwdCheck($test2, $hash2);
 		pwdCheck($test2, $hash2);
@@ -67,7 +63,7 @@
 		}
 		?>
 		
-		<form method="POST">
+		<form method="POST" class="form-2">
 			<input type="password" name="pwd" placeholder="Password" value="<?php echo $pwd?>">
 			<button type="submit" name="submit">Hash</button><br>
 			<input type="text" name="hash" placeholder="Hashed Password" value="<?php  echo $pwdHash?>">
