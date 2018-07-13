@@ -59,7 +59,7 @@ if(isset($_GET['user']))
 				</form>
 				</div>';
 				else echo '<div class="signUp">
-					<h3>Public wishlist link: </h3> <br/><h4><a style="color:black" href="publicWishlist.php?user='.$_SESSION['u_uid'].'"> www.herjus.no.publicWishlist.php?user='.$_SESSION['u_uid'].'</a></h4><br/>
+					<h3>Public wishlist link: </h3> <br/><h4><a style="color:black" href="publicWishlist.php?user='.$_SESSION['u_uid'].'"> www.herjus.no/publicWishlist.php?user='.$_SESSION['u_uid'].'</a></h4><br/>
 
 					<form method="POST">
 						<button type="submit" name="changeVisibility" value="private">Make Wishlist Private</button>

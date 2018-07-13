@@ -21,11 +21,11 @@
     ?>
     <div class="signUp">
         <h2>Log in</h2>
-        <form method="POST" action="includes/login.inc.php">
+        <form method="POST" action="includes/userhandler.inc.php">
         <input type="hidden" name="origin" value="<?php echo $origin ?>">
         <input type="text" name="uid" placeholder="username/e-mail">
         <input type="password" name="pwd" placeholder="password">
-        <button type="submit" name="submit">Login</button>
+        <button type="submit" name="submit" value="login">Login</button>
         </form>
     </div>
 
