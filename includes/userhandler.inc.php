@@ -77,7 +77,7 @@ if(isset($_POST['submit']))
 		if(!empty(htmlspecialchars(fixString($_POST['last'])))) $user->setLast(htmlspecialchars(fixString($_POST['last'])));
 		if(!empty(htmlspecialchars(fixString($_POST['uid'])))) $user->setUid(htmlspecialchars(fixString($_POST['uid'])));
 		if(!empty(htmlspecialchars(fixString($_POST['email'])))) $user->setEmail(htmlspecialchars(fixString($_POST['email'])));
-		if(!empty(htmlspecialchars(fixString($_POST['gender'])))) $user->setGender($_POST['gender']);
+		$user->setGender($_POST['gender']);
 		$origin = htmlentities($_POST['origin']);
 		$pwd = htmlspecialchars($_POST['pwd']);
 		$pwdr = htmlspecialchars($_POST['pwdr']);
@@ -119,7 +119,6 @@ if(isset($_POST['submit']))
 						}
 						else
 						{
-							
 							$signup = $user->signup($user->user_first, $user->user_last, $user->user_uid, $pwd, $pwdr, $user->user_email, $user->user_gender);
 							
 							if($signup == "success")
@@ -142,6 +141,13 @@ if(isset($_POST['submit']))
 		session_unset();
 		session_destroy();
 		header("Location: ../index.php?logout=success");
+		exit();
+	}
+	elseif($button == "deletetwitter")
+	{
+		$user = new User;
+		$delete = $user->twDelete();
+		header("Location: ../profile.php?logout=".$delete);
 		exit();
 	}
 	else header("Location: ../$origin.php?buttonerror=".$button);

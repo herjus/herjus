@@ -1,5 +1,7 @@
 <?php
 
+include_once 'dbhkeys.class.php';
+
 class Dbh
 {
 	private $servername;
@@ -10,10 +12,10 @@ class Dbh
 
 	public function connect()
 	{
-		$this->servername="";
-		$this->username="";
-		$this->password="";
-		$this->dbname="";
+		$this->servername=dbServername;
+		$this->username=dbUsername;
+		$this->password=dbPassword;
+		$this->dbname=dbName;
 		$this->charset ="utf8mb4";
 
 		try 

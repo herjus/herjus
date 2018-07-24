@@ -44,6 +44,28 @@ class Wishlist extends Dbh
 		else $additem = "not_logged_in";
 		return $additem;
 	}
+	public function merge($wldecoded)
+	{
+		$this->getWl();
+
+		$id = $_SESSION['u_id'];
+		if(!empty($id))
+		{
+			$wldecoded = json_decode($wlencoded, true);
+			if($this->user_wl === null) $this->user_wl = array();
+
+			array_push($this->user_wl, $wldecoded);
+			$json_wl = json_encode($this->user_wl);
+
+			//update new wishlist with new item
+			$sql = "UPDATE users SET user_wl = ? WHERE user_id='$id' ;";
+			$stmt = $this->connect()->prepare($sql);
+			$stmt->execute([$json_wl]);
+			$additem = "added";
+		}
+		else $additem = "not_logged_in";
+		return $additem;
+	}
 	public function deleteItem($date)
 	{
 		$wl = $this->user_wl;

@@ -11,6 +11,10 @@ if(isset($_GET['user']))
 	$wishlist->getPublicWl($user);
 	$wl = $wishlist->user_wl;
 }
+elseif(isset($_SESSION['u_uid']))
+{
+	header('Location: publicWishlist.php?user='.$_SESSION['u_uid']);
+}
 ?>
 
 

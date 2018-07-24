@@ -19,16 +19,21 @@
     else $origin = "index";
         
     ?>
-    <div class="signUp">
-        <h2>Log in</h2>
-        <form method="POST" action="includes/userhandler.inc.php">
-        <input type="hidden" name="origin" value="<?php echo $origin ?>">
-        <input type="text" name="uid" placeholder="username/e-mail">
-        <input type="password" name="pwd" placeholder="password">
-        <button type="submit" name="submit" value="login">Login</button>
-        </form>
-    </div>
-
+    <?php if(!isset($_SESSION['u_id']) || empty($_SESSION['u_id'])) 
+        echo '<div class="signUp">
+            <h2>Log in</h2>
+            <form method="POST" action="includes/userhandler.inc.php">
+            <input type="hidden" name="origin" value="<?php echo $origin ?>">
+            <input type="text" name="uid" placeholder="username/e-mail">
+            <input type="password" name="pwd" placeholder="password">
+            <button type="submit" name="submit" value="login">Login</button>
+            </form>
+            <form method="POST" action="twitter/twlogin.php">
+            <input type="hidden" name="origin" value="<?php echo $origin ?>">
+            <button type="submit" name="submit">Twitter Login</button>
+            </form>
+        </div>'
+        ?>
     <div class="signUp">
         <h2>Sign Up</h2>
         <form action="includes/userhandler.inc.php" method="POST">
@@ -40,9 +45,9 @@
         <input type="password" name="pwdr" placeholder="Repeat Password"/><br />
         <input type="text" name="email" placeholder="Email" value="<?php if(isset($email)) echo $email?>"/><br />
         <div class="radio-1">
-            <input type="radio" name="gender" value="male" checked > Male <br>
-            <input type="radio" name="gender" value="female"<?php if(isset($_GET['gender'])) { if ($_GET['gender']=="female") echo 'checked'; }  ?> > Female <br>
-            <input type="radio" name="gender" value="peoplekind" <?php if(isset($_GET['gender'])) { if ($_GET['gender']=="peoplekind") echo 'checked'; }  ?> > Peoplekind <br>   
+            <input type="radio" name="gender" value="Male" checked > Male <br>
+            <input type="radio" name="gender" value="Female"<?php if(isset($_GET['gender'])) { if ($_GET['gender']=="Female") echo 'checked'; }  ?> > Female <br>
+            <input type="radio" name="gender" value="Peoplekind" <?php if(isset($_GET['gender'])) { if ($_GET['gender']=="Peoplekind") echo 'checked'; }  ?> > Peoplekind <br>   
         </div>
         
         <button type="submit" name="submit" value="signup">Sign up</button>
@@ -83,6 +88,10 @@
             elseif($signupCheck == "emailtaken") 
             {
                 echo "<p class='error'>Email is already signed up.</p>";
+            }
+            elseif($signupCheck == "uidemailtaken") 
+            {
+                echo "<p class='error'>Email and username are already signed up.</p>";
             }
             elseif($signupCheck == "success") 
             {

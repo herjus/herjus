@@ -18,11 +18,14 @@ a:visited{
 }
 a:hover{
 	color:#d2dcef;
+	text-decoration:underline;
 }
 .mainContainer{
 	background-image:url('../images/sample2.jpg');
 	background-size:cover;
 	min-height: 100%;
+	margin:auto;
+	overflow:auto;
 }
 
 .mainHeader{
@@ -43,17 +46,27 @@ a:hover{
 }
 .navBar{
 	float:left;
+	font-size:1.2em;
+	height: 25px;
+	align-content:center;
 	padding:0.4em 0em;
 	background-color:#283e79;
 	color:white;
 	width:100%;
+	box-shadow: 0px 10px 8px #101535c4;
 }
 
 
 .navBar ul{
+	float:left;
+	width:75%;
+	text-align:;
 	padding-left:1em;
+	margin-top:0;
 }
 .navBar li{
+	height:100%;
+
 	font-size: 0.85em;
 	display:inline;
 	padding-left:1em;
@@ -63,9 +76,29 @@ a:hover{
 }
 .nav-login{
 	float:right;
-	width: 550px;
+	width: 630px;
 	padding-top:10px;
 }
+.nav-1{
+	align-content: center;
+}
+.timeBox{
+	float:right;
+	padding-right:8px;
+	text-align:right;
+	color:#daeeff;
+	width:280px;
+
+}
+.login-container{
+	padding-right:30px;
+	display:inline-block;
+}
+
+.login-container a {
+	padding-right:0px;
+}
+
 header{
 	height:250px;
 	width:100%;
@@ -89,7 +122,7 @@ header .nav-login div form button{
     float:left;
     width:60px;
     height:20px;
-    margin-right:30px;
+    margin-right:20px;
     border:none;
     background-color:#f3f3f3;
     font-family:arial;
@@ -104,7 +137,7 @@ header .nav-login div form button{
 header .nav-login div a{
     float:right;
     width:60px;
-    height:20px;
+    height:18px;
     margin-right:30px;
     padding-top:3px;
     border:none;
@@ -142,10 +175,9 @@ header .nav-login div a{
 }
 .mainContent{
 	width:100%;
-	background-image:url('../images/sample2.jpg');
-	background-size:cover;
 	margin:auto;
 	overflow:auto;
+	min-height: 100%;
 	padding-bottom:50px;
 
 }
@@ -177,7 +209,8 @@ header .nav-login div a{
 	margin:auto;
 	text-align:left;
 	font-size:1.1em;
-	background-color:#bdeae452;
+	background-color:#a5b3d02e;
+	box-shadow:50px 0px 50px #a5b3d02e;
 }
 .main-1 h4{
 	margin-top: 20px;
@@ -318,7 +351,6 @@ header .nav-login div a{
 	width:268px;
 }
 
-
 .form-1 {
 	align-items: left;
 	text-align:left;
@@ -398,6 +430,7 @@ header .nav-login div a{
 
 
 .conn{
+	float:left;
 	width:90%;
 	font-size: 0.9em;
 	background-color:black;
@@ -447,10 +480,7 @@ header .nav-login div a{
 }
 
 
-.timeBox{
-	background-color:#a9e5f93b;
-	padding:2em;
-}
+
 
 .webForm{
 	width:90%;
@@ -522,6 +552,7 @@ font-size:1.2em;
 	width: 400px;
 }
 .box-2{
+	float:left;
 	border: 2px black solid;
 	padding:20px;
 	color:black;
@@ -535,3 +566,23 @@ font-size:1.2em;
 	padding-left:80px;
 }
 
+.twitter-container
+{
+	float:right;
+	height:100%;
+	width:45%;
+}
+.twitter-name
+{
+	float:right;
+}
+.twitter-container2
+{
+	float:left;
+	height:100%;
+	width:45%;
+}
+.twitter-name2
+{
+	float:left;
+}

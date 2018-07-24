@@ -1,6 +1,6 @@
 <?php include_once 'mainHeader.php';
 
-if(!isset($_SESSION['u_uid'])) 
+if(!isset($_SESSION['u_id'])) 
 {
 	header('Location: index.php');
 	exit();
@@ -13,22 +13,69 @@ if(!isset($_SESSION['u_uid']))
 		<div>
 			<div class="signUp">
 			<?php 
-			echo "<br> Name: " . $_SESSION['u_first'] . ' '. $_SESSION['u_last'] . '<br>';
-			echo "E-mail: " . $_SESSION['u_email'] . '<br>';
-			echo "Username: " . $_SESSION['u_uid'] . '<br>';
+			/*
+			$userClass = new User;
+			$handler = $userClass->twitterHandler("herjus3");*/
+
+			if(isset($_SESSION['u_uid']) && !empty($_SESSION['u_uid']))
+			{
+				echo "<br> Name: " . $_SESSION['u_first'] . ' '. $_SESSION['u_last'] . '<br>';
+				echo "E-mail: " . $_SESSION['u_email'] . '<br>';
+				echo "Username: " . $_SESSION['u_uid'] . '<br>';
+			}
+			
 			echo "Joined: " . $_SESSION['date'] . '<br>';
 			echo 'Server Id: ' . $_SESSION['u_id'] . '<br>';
-			 ?></div>
+
+			if(empty($_SESSION['u_uid']) && !empty($_SESSION['twitter_name']))
+			{
+				echo '<form method="POST" action="signup.php">
+						<button>Sign Up</button>		
+						</form>';
+			}
+			if(isset($_SESSION['twitter_name']) && !empty($_SESSION['twitter_name'])) 
+			{
+				echo "Twitter Name: " . $_SESSION['twitter_name'].'<br>';
+				echo '<form method="POST" action="includes/userhandler.inc.php">
+						<button type="submit" name="submit" value="deletetwitter" name="connecttwitter">Disconnect Twitter From Account</button>		
+						</form>';
+			}
+			else
+			{
+				echo '<form method="POST" action="twitter/twlogin.php">
+						<button type="submit" name="connecttwitter">Connect account to Twitter</button>		
+						</form>';
+			}
+			?>
+
+			<?php 	if(!isset($_POST['showsession'])) 
+						echo '<form method="POST">
+							<button type="submit" name="showsession">Show All Session Data</button>
+							</form>';
+					else 
+					{
+						echo "<br><br>";
+						foreach($_SESSION as $key => $item)
+						{
+							if(is_string($item)) echo "<br>".$key.' : '.$item;
+							else
+							{
+								echo "<br>".$key.' : ';
+								print_r($item);
+							} 
+						}
+					}
+			?>
+			</div>
+
 			 <div>
-			 	
-			 
 			 <?php 
-			 	if(!isset($_GET['requeststart']) && !isset($_GET['requestpwd']))
+			 	if(!isset($_GET['requeststart']) && !isset($_GET['requestpwd']) && !empty($_SESSION['u_uid']))
 			 		echo '<form class ="signUp">
 			 			<button type="submit" name="requeststart" >Request Password Hash on server</button>
 			 			</form>';
 			 
-	 			else
+	 			elseif(!empty($_SESSION['u_uid']))
 	 			{
 	 			 	echo '<form method="POST" action="includes/userhandler.inc.php" class="signUp">
 		  				<button type="submit" name="submit" value ="requestpwd">Request Password Hash stored on server</button>
@@ -60,7 +107,7 @@ if(!isset($_SESSION['u_uid']))
 
 	<div>
 		<h1>Change Password</h1>
-		<?php if(!isset($_GET['startpwdr']) && !isset($_GET['form'])) echo '<form class ="signUp">
+		<?php if(!isset($_GET['startpwdr']) && !isset($_GET['form'])  && !empty($_SESSION['u_uid'])) echo '<form class ="signUp">
 		<button type="submit" name="startpwdr">Change Password</button>
 		</form>' ?>
 		
