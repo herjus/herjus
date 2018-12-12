@@ -19,7 +19,13 @@
             </p>
 
             <h2>Work History</h2>
-            <h4>05.2018 - current - Software development, PHP</h4>
+            <h4>07.2018 - current - Software development, C#</h4>
+            <p class="work-box">
+                <ul class="work-list">
+                    <li>Running and devloping updates the crypto trading bot</li> 
+                </ul>
+            </p>
+            <h4>05.2018 - 07.2018 - Software development, PHP</h4>
             <p class="work-box">
                 <ul class="work-list">
                     <li>Website development</li> 

@@ -10,18 +10,18 @@ height:100%;
 }
 
 a{
-	color:#c1cde4;
+	color:#0045ca;
 	text-decoration: none;
 }
 a:visited{
-	color:#c1cde4;
+	color:#0045ca;
 }
 a:hover{
-	color:#d2dcef;
+	color:#00ca36;
 	text-decoration:underline;
 }
 .mainContainer{
-	background-image:url('../images/sample2.jpg');
+	background-image:url('../images/cross.png');
 	background-size:cover;
 	min-height: 100%;
 	margin:auto;
@@ -100,9 +100,9 @@ a:hover{
 }
 
 header{
-	height:250px;
+	height:150px;
 	width:100%;
-	background-image:url('../images/trumpheader.jpg');
+	background-image:url('../images/blue-banner.jpg');
 	background-size:cover;
 }
 header .nav-login div form input{
@@ -164,7 +164,7 @@ header .nav-login div a{
 .footer{
 	height:50px;
 	position:relative;
-	background-image:url('../images/usflag.gif');
+	background-image:url('../images/blue-banner.jpg');
 	color:#fff;
 	text-align:center;
 	margin-top:-50px;
@@ -183,13 +183,12 @@ header .nav-login div a{
 }
 .mainContent h1{
 	margin:5px;
-	color: #c5d7e6;
+	color: black;
 	font-size:2em;
 	
 }
 .mainContent h2{
-	color: white;
-	color: #c5d7e6;
+	color: black;
 	font-size:1.6em;
 	margin:10px;
 

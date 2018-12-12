@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Herjus</title>
+    <title>Herjus.no</title>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 
@@ -12,7 +12,7 @@
 	<div class=mainContainer>
 		<div class="mainHeader">
 			<header>
-				<h1>Welcome to Freemdom!</h1>
+				<h1>Welcome!</h1>
 				<div class="nav-login">
 					
 					<?php 
