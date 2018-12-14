@@ -64,7 +64,8 @@
 				    	<li><a href="signup.php?origin=calculator">Calculator</a></li>
 				        <li><a href="test.php">Test Site</a></li>
 				        <li><a href="twitter.php">Twitter</a></li>
-				        <li><a href="signup.php">Sign up</a></li>';
+				        <li><a href="signup.php">Sign up</a></li>
+				        <li><a href="contact.php">Contact</a></li>';
 				        else
 				    	echo 
 						'<li><a href="wishlist.php">Wish List</a></li>
@@ -72,7 +73,8 @@
 						<li><a href="calculator.php">Calculator</a></li>
 				        <li><a href="test.php">Test Site</a></li>
 				        <li><a href="twitter.php">Twitter</a></li>
-				        <li><a href="profile.php">Profile</a></li>'; ?>
+				        <li><a href="profile.php">Profile</a></li>
+				        <li><a href="contact.php">Contact</a></li>'; ?>
 				    	</ul>	
 					</div>
 					
