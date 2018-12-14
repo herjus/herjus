@@ -21,11 +21,7 @@ a:hover{
 	text-decoration:underline;
 }
 .mainContainer{
-<<<<<<< HEAD
 	background-image:url('../images/water2.jpg');
-=======
-	background-image:url('../images/cross.png');
->>>>>>> a52d883667baa065c17f7077ba28d1136951ec50
 	background-size:cover;
 	min-height: 100%;
 	margin:auto;
